@@ -1,0 +1,44 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.jumbotron{
+  background-image: url('img/jumbotron.jpg');
+  background-size: cover;
+  height: 850px;
+  width: 1900px;
+}
+
+.jumbotron .display-4{
+  margin-top: 100px;
+  margin-left: 30px;
+  font-family: sans-serif;
+}
+
+.jumbotron .lead{
+  margin-left: 30px;
+  font-family: sans-serif;
+}
+
+.jumbotron hr{
+  margin-left: 30px;
+  margin-right: 1200px;
+}
+
+.jumbotron a{
+  margin-left: 30px;
+}
+
+.card{
+  margin-top: 30px;
+  margin-left: 130px;
+  margin-bottom: 50px;
+}
+
+h2{
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 35pt;
+}
