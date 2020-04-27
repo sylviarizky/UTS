@@ -42,7 +42,7 @@
     </nav>
   </head>
   <body>
-    <div class="jumbotron">
+    <div class="jumbotron ">
       <h1 class="display-4"><strong>Hello Chef!</strong></h1>
       <p class="lead">Temukan aneka resep kue tradisional dan kekinian yang kamu cari</p>
       <hr class="my-3">
@@ -265,7 +265,7 @@
   </div>
 </section>
 
-<footer class="mt-5 bg-dark text-center">
+<footer class="bg-dark text-center">
   Sylvia Rizky Anissa Noviana - Pemrograman Berbasis Web E 2020
 </footer >
     <!-- Optional JavaScript -->

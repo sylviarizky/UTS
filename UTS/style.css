@@ -6,8 +6,8 @@
 .jumbotron{
   background-image: url('img/jumbotron.jpg');
   background-size: cover;
-  height: 850px;
-  width: 1900px;
+  height: 900px;
+  width: 100%;
 }
 
 .jumbotron .display-4{
@@ -28,6 +28,18 @@
 
 .jumbotron a{
   margin-left: 30px;
+}
+
+.navbar{
+  position: fixed;
+  width: 100%;
+  height: 6%;
+  z-index: 99999;
+}
+
+body{
+  overflow-x: hidden;
+
 }
 
 .card{
