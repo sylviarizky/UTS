@@ -1,4 +1,25 @@
-<?php  ?>
+<?php
+$file = "data.json";
+$data_json = file_get_contents($file);
+$data = json_decode($data_json,true);
+if ($_SERVER["REQUEST_METHOD"]==="POST"){
+    $temp = [
+        "nama" => $_POST["masakan"],
+        "email" => $_POST["email"],
+        "bahan" => $_POST["bahan"],
+        "cara" => $_POST["cara"]
+    ];
+    if(strcmp($_POST["kategori"],"Tradisional")==0){
+        array_push($data["tradisional"],$temp);
+    }else{
+        array_push($data["modern"],$temp);
+    }
+    $json_file = json_encode($data, JSON_PRETTY_PRINT);
+    $data_json = file_put_contents($file,$json_file);
+}
+$tradisional = array($data["tradisional"]);
+$modern = array($data["modern"]);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,14 +30,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand ml-3" href="#"><strong>KueKita</strong></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse ml-5 " id="navbarSupportedContent">
+      <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link ml-3" href="#">Home <span class="sr-only">(current)</span></a>
@@ -40,9 +62,7 @@
         </form>
       </div>
     </nav>
-  </head>
-  <body>
-    <div class="jumbotron ">
+    <div class="jumbotron">
       <h1 class="display-4"><strong>Hello Chef!</strong></h1>
       <p class="lead">Temukan aneka resep kue tradisional dan kekinian yang kamu cari</p>
       <hr class="my-3">
@@ -51,73 +71,20 @@
 
 <!-- page 2 -->
 <section id="tradisional">
-  <h2>Kue Tradisional</h1>
+  <h2>Kue Tradisional</h2>
     <div class="row">
+        <?php foreach ($tradisional as $object):
+            foreach ($object as $value):?>
       <div class="card" style="width: 20rem;">
         <img src="img/kuelapis.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">KUE LAPIS</h5>
+          <h5 class="card-title"><?= $value["nama"] ?></h5>
           <p class="card-text">Kue Tradisional yang tak pernah terlewatkan di setiap acara.</p>
           <a href="#" class="btn btn-success">MASAK</a>
         </div>
       </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/klepon.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">KUE KLEPON</h5>
-          <p class="card-text">Jajanan pasar yang memiliki isi khas, yaitu gula merah yang akan terasa nikmat saat digigit.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/lemper.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">LEMPER</h5>
-          <p class="card-text">Ini nih, kue unik dari beras berisi ayam yang udah disisir terus dibungkus pake daun.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/bikang.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">BIKANG</h5>
-          <p class="card-text">Bentuknya yang unik itu loo yang bikin penasaran gimana rasanya.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/lumpur.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">KUE LUMPUR</h5>
-          <p class="card-text">Jajan pasar yang endol surendol tak kendol kendol.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/apem.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">APEM</h5>
-          <p class="card-text">.......</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/onde.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">ONDE-ONDE</h5>
-          <p class="card-text">.......</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/nagasari.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">NAGASARI</h5>
-          <p class="card-text">.......</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      </div>
+        <?php endforeach; endforeach;?>
+
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
@@ -138,71 +105,17 @@
 <section id="kekinian" style="background-color: #DCDCDC;">
   <h2>Kue Kekinian</h2>
     <div class="row">
+        <?php foreach ($modern as $object):
+        foreach ($object as $value):?>
       <div class="card" style="width: 20rem;">
         <img src="img/donat.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">KUE DONAT</h5>
+          <h5 class="card-title"><?= $value["nama"] ?></h5>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
           <a href="#" class="btn btn-success">MASAK</a>
         </div>
       </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/chocodb.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">CHOCOLATE DESSERT BOX</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/vanillacake.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">VANILLA CAKE</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/piesusu.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">PIE SUSU BALI</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/brownies.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">BROWNIES COKLAT</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/bolukeju.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">BOLU KEJU</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/martabakmanis.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">MARTABAK MANIS MINI</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-        <img src="img/pastry.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">PASTRY</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet tempor lacus sed aliquam. Maecenas placerat fermentum odio, eu laoreet risus scelerisque eu. Sed sit amet dui augue. Duis dapibus efficitur placerat.</p>
-          <a href="#" class="btn btn-success">MASAK</a>
-        </div>
-      </div>
-      </div>
+        <?php endforeach;endforeach;?>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
@@ -222,40 +135,41 @@
 <!-- page 4 -->
 <section id="resep">
   <h2>Tulis Resepmu</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7">
-          <div class="form-group">
-            <label><strong>Nama</strong></label>
-            <input type="text" name="" class="form-control">
+    <form action="index.php" method="post">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="form-group">
+                <label><strong>Nama Masakan</strong></label>
+                <input type="text" name="masakan" class="form-control">
+              </div>
+                <div class="form-group">
+                    <label><strong>Kategori</strong></label>
+                    <select name="kategori" id="kategori" class="form-control">
+                        <option value="Tradisional">tradisional</option>
+                        <option value="modern">modern</option>
+                    </select>
+                </div>
+              <div class="form-group">
+                <label><strong>Email</strong></label>
+                <input type="email" name="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label><strong>Bahan</strong></label>
+                <textarea type="text" class="form-control" rows="25" name="bahan"></textarea>
+              </div>
+              <div class="form-group">
+                <label><strong>Cara Masak</strong></label>
+                <textarea type="text" class="form-control" rows="50" name="cara"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success" name="submit">KIRIM</button>
+            </div>
+            <div class="col-md-5">
+              <img src="img/cooking.png" width="500px">
+            </div>
           </div>
-          <div class="form-group">
-            <label><strong>Email</strong></label>
-            <input type="email" name="" class="form-control">
-          </div>
-          <div class="form-group">
-            <label><strong>Kategori (Tradisional / Kekinian)</strong></label>
-            <input type="text" name="" class="form-control">
-          </div>
-          <div class="form-group">
-            <label><strong>Judul</strong></label>
-            <input type="text" name="" class="form-control">
-          </div>
-          <div class="form-group">
-            <label><strong>Bahan</strong></label>
-            <textarea type="text" class="form-control" rows="25"></textarea>
-          </div>
-          <div class="form-group">
-            <label><strong>Cara Masak</strong></label>
-            <textarea type="text" class="form-control" rows="50"></textarea>
-          </div>
-          <button type="submit" class="btn btn-success">KIRIM</button>
         </div>
-        <div class="col-md-5">
-          <img src="img/cooking.png" width="500px">
-        </div>
-      </div>
-    </div>
+    </form>
 </section>
 
 <!-- page 4 -->
@@ -273,9 +187,16 @@
   </div>
 </section>
 
-<footer class="bg-dark text-center">
-  Sylvia Rizky Anissa Noviana - Pemrograman Berbasis Web E 2020
-</footer >
+<footer style="background-color: #2F4F4F;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+          <p class="copyright text-center">Copyright &copy; "182410102052" 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
