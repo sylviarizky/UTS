@@ -16,7 +16,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse ml-5 " id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link ml-3" href="#">Home <span class="sr-only">(current)</span></a>
@@ -232,6 +232,14 @@
           <div class="form-group">
             <label><strong>Email</strong></label>
             <input type="email" name="" class="form-control">
+          </div>
+          <div class="form-group">
+            <label><strong>Kategori (Tradisional / Kekinian)</strong></label>
+            <input type="text" name="" class="form-control">
+          </div>
+          <div class="form-group">
+            <label><strong>Judul</strong></label>
+            <input type="text" name="" class="form-control">
           </div>
           <div class="form-group">
             <label><strong>Bahan</strong></label>
